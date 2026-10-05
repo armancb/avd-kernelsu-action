@@ -129,9 +129,9 @@ jobs:
         run: |
           mkdir -p android-kernel
           cd android-kernel
-          echo "Initializing repo for branch: ${{ env.KERNEL_MANIFEST_BRANCH }}"
           repo init --depth=1 -u https://android.googlesource.com/kernel/manifest -b "${{ env.KERNEL_MANIFEST_BRANCH }}"
-          echo "Syncing repository..."
+          cp "$GITHUB_WORKSPACE/manifest_9964412.xml" .repo/manifests/pinned.xml
+          repo init -m pinned.xml
           repo sync -c -j12 --no-tags --no-clone-bundle
 
       - name: Integrate KernelSU & Configure Kernel
