@@ -296,7 +296,7 @@ jobs:
             done
 
             # Remove abi_gki_protected_exports to prevent module build breaks
-            rm -f common/android/abi_gki_protected_exports_* 2>/dev/null || true
+            for f in common/android/abi_gki_protected_exports_*; do [ -f "$f" ] && : > "$f"; done
 
             # Build static ksu_susfs tool for x86_64 if gcc is present
             if [ -d "susfs4ksu/ksu_susfs" ]; then
