@@ -343,8 +343,8 @@ jobs:
           echo "tools/bazel run ${BAZEL_FLAGS} ${{ env.BUILD_TARGET }} -- --destdir $DIST_DIR"
           echo "=========================================="
 
-          tools/bazel run ${BAZEL_FLAGS} "${{ env.BUILD_TARGET }}" -- --destdir "$DIST_DIR" 2>&1 | tee "$BUILD_LOG"
-
+          tools/bazel run ${BAZEL_FLAGS} "${{ env.BUILD_TARGET }}" -- --dist_dir "$DIST_DIR" 2>&1 | tee "$BUILD_LOG"
+          
           # Report the KernelSU driver version and the manager APK signature the kernel
           # expects, so the matching manager APK can be selected and verified.
           KSU_DRIVER_VER=$(grep -m1 -oE '(KernelSU(-Next)?|SukiSU(-Ultra)?|ReSukiSU) version( code)?: [0-9]+' "$BUILD_LOG" | awk '{print $NF}' || true)
